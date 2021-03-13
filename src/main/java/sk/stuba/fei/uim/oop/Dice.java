@@ -9,5 +9,5 @@ public class Dice {
         System.out.println("hodil si : "+number+"\n");
         return number;
     }
-//vrati cislo od 1-6
+
 }
