@@ -5,7 +5,9 @@ public class Dice {
     public int dice() {
         final int MIN = 1;
         final int MAX = 6;
-        return ThreadLocalRandom.current().nextInt(MIN, MAX + 1);
+        int number= ThreadLocalRandom.current().nextInt(MIN, MAX + 1);
+        System.out.println("hodil si : "+number+"\n");
+        return number;
     }
 //vrati cislo od 1-6
 }
