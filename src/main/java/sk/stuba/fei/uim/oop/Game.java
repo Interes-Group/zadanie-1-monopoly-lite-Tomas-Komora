@@ -11,7 +11,7 @@ public class Game {
             System.out.println("Set name for "+i+". player: ");
             Players player = new Players();
             player.setName(KeyboardInput.readString());
-            player.setMoney(15000);
+            player.setMoney(5000);
             player.setPosition(0);
             player.setRoundsInPrison(0);
             playerList[i]=player;
@@ -29,7 +29,7 @@ public class Game {
                 System.out.println("PLAYER :"+player.getName());
                 if(player.getRoundsInPrison()!=0){
                     player.setRoundsInPrison(player.getRoundsInPrison()-1);
-                    System.out.println(player.getName()+ "stay in prison "+player.getRoundsInPrison()+" rounds \n");
+                    System.out.println(player.getName()+ " stay in prison "+player.getRoundsInPrison()+" rounds \n");
                     System.out.println("Next player-----------------------------------");
                 }
                 else{
@@ -60,23 +60,31 @@ public class Game {
                         player.getPosition()==7 || player.getPosition()==8 || player.getPosition()==10 || player.getPosition()==11 ||
                         player.getPosition()==13||player.getPosition()==14||player.getPosition()==16||player.getPosition()==17||
                         player.getPosition()==19||player.getPosition()==20||player.getPosition()==22||player.getPosition()==23){ //buildings
-                            if (playingArea1[player.getPosition()-1].getOwner()==null){
-                                System.out.println("Do you want buy "+playingArea1[player.getPosition()].getName()+ "(yes/no)");
-                                String answer=KeyboardInput.readString();
-                                if(answer=="yes"){
+                            if (playingArea1[player.getPosition()].getOwner()==null){
+                                if(player.getMoney()<2001){
+                                    System.out.println("!!!Warning!!! you dont have enaught money");
+                                }
+                                System.out.println("Do you want buy "+playingArea1[player.getPosition()].getName()+ "(yes=1/no=0) write number ");
+                                int answer=KeyboardInput.readInt();
+                                if(answer==1){
                                     player.setMoney(player.getMoney()-playingArea1[player.getPosition()].getPrice());
                                     playingArea1[player.getPosition()].setOwner(player.getName());
                                     System.out.println("you buy "+playingArea1[player.getPosition()].getName());
                                 }
-                                else if(answer=="no"){
+                                else if(answer==0){
                                     System.out.println("you dont buy it ");
                                 }
                             }
                             else{
                                 String ownerName=playingArea1[player.getPosition()].getOwner();
                                 player.setMoney(player.getMoney()-150);
-                                System.out.println("you are in "+playingArea1[player.getPosition()].getOwner()+ "buildings you play 150$");
-
+                                System.out.println("you are in "+playingArea1[player.getPosition()].getOwner()+ " buildings you play 150$");
+                                String owner =playingArea1[player.getPosition()].getOwner();
+                                for(int help=0;help<players.length;help++){
+                                    if(players[help].getName()==owner){
+                                        players[help].setMoney(players[help].getMoney()+150);
+                                    }
+                                }
                             }
 
                         }
