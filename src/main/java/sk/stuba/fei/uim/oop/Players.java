@@ -3,7 +3,7 @@ package sk.stuba.fei.uim.oop;
 public class Players {
     private String name;
     private int money;
-    private int status; //ked 1 je v hre ked 2 vo vazaní.
+    private int roundsInPrison; //ked 1 je v hre ked 2 vo vazaní.
     private int position;
 
     public void setName(String name) {
@@ -18,7 +18,23 @@ public class Players {
         this.position = position;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setRoundsInPrison(int roundsInPrison) {
+        this.roundsInPrison = roundsInPrison;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public int getRoundsInPrison() {
+        return roundsInPrison;
+    }
+
+    public int getPosition() {
+        return position;
     }
 }
