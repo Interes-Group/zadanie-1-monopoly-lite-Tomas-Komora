@@ -21,7 +21,7 @@ public class Game {
 
     void gameOfTrones(){
         PlayingArea playingArea=new PlayingArea();
-        Buildings[] playingArea1 = playingArea.setPlayingArea();
+        Tiles[] playingArea1 = playingArea.setPlayingArea();
         Players[] players=setPlayer();
         while(true){
             for(int i=0;i< players.length;i++){
@@ -35,9 +35,9 @@ public class Game {
                 else{
                     Dice dice=new Dice();
                     int value=dice.dice();
-                    player.setPosition(player.getPosition()+value);
+                    player.setPosition((player.getPosition()+value)%24);
                     System.out.println("you threw :"+ value);
-                    System.out.println("your position is :"+player.getPosition());
+                    System.out.println("your position is :"+player.getPosition()%24);
                     System.out.println("you have : "+player.getMoney()+" money");
                     if(player.getPosition()>24){
                         player.setPosition(player.getPosition()-24);
@@ -60,15 +60,16 @@ public class Game {
                         player.getPosition()==7 || player.getPosition()==8 || player.getPosition()==10 || player.getPosition()==11 ||
                         player.getPosition()==13||player.getPosition()==14||player.getPosition()==16||player.getPosition()==17||
                         player.getPosition()==19||player.getPosition()==20||player.getPosition()==22||player.getPosition()==23){ //buildings
-                            if (playingArea1[player.getPosition()].getOwner()==null){
+                                Tiles tiles=playingArea1[player.getPosition()];
+                            if (((Buildings) tiles).getOwner() ==null){
                                 if(player.getMoney()<2001){
                                     System.out.println("!!!Warning!!! you dont have enaught money");
                                 }
                                 System.out.println("Do you want buy "+playingArea1[player.getPosition()].getName()+ "(yes=1/no=0) write number ");
                                 int answer=KeyboardInput.readInt();
                                 if(answer==1){
-                                    player.setMoney(player.getMoney()-playingArea1[player.getPosition()].getPrice());
-                                    playingArea1[player.getPosition()].setOwner(player.getName());
+                                    player.setMoney(player.getMoney()-((Buildings) tiles).getPrice());
+                                    ((Buildings) tiles).setOwner(player.getName());
                                     System.out.println("you buy "+playingArea1[player.getPosition()].getName());
                                 }
                                 else if(answer==0){
@@ -76,10 +77,10 @@ public class Game {
                                 }
                             }
                             else{
-                                String ownerName=playingArea1[player.getPosition()].getOwner();
+                                String ownerName=((Buildings) tiles).getOwner();
                                 player.setMoney(player.getMoney()-150);
-                                System.out.println("you are in "+playingArea1[player.getPosition()].getOwner()+ " buildings you play 150$");
-                                String owner =playingArea1[player.getPosition()].getOwner();
+                                System.out.println("you are in "+((Buildings) tiles).getOwner()+ " buildings you play 150$");
+                                String owner =((Buildings) tiles).getOwner();
                                 for(int help=0;help<players.length;help++){
                                     if(players[help].getName()==owner){
                                         players[help].setMoney(players[help].getMoney()+150);
