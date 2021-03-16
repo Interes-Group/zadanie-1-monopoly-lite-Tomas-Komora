@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.game;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {

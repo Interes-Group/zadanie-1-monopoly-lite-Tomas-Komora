@@ -1,6 +1,8 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.chanceCards;
 
-public class ChanceCardGoToStart extends Chance{
+import sk.stuba.fei.uim.oop.game.Players;
+
+public class ChanceCardGoToStart extends Chance {
     public void chanceCardGoToStart(Players player){
         setStatement("you chance card set your position on start");
         player.setPosition(0);

@@ -1,29 +1,14 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.game;
 
-
-import java.util.Queue;
 
 public class Game{
-    Players[] setPlayer(){
-        System.out.println("How many players are going to play? (2-8)");
-        int NumberOfPlayer = KeyboardInput.readInt();
-        Players[] playerList = new Players[NumberOfPlayer];
-        for(int i=0; i<NumberOfPlayer;i++){
-            System.out.println("Set name for "+(i+1)+". player: ");
-            Players player = new Players();
-            player.setName(KeyboardInput.readString());
-            player.setMoney(5000);
-            player.setPosition(0);
-            player.setRoundsInPrison(0);
-            playerList[i]=player;
-        }
-        return playerList;
-    }
 
-    void gameOfTrones(){
+    public void monopolyGame(){
+        InputIntegers exceptions=new InputIntegers();
         PlayingArea playingArea=new PlayingArea();
         Tiles[] playingArea1 = playingArea.setPlayingArea();
-        Players[] players=setPlayer();
+        Players playerses=new Players();
+        Players[] players=playerses.setPlayer();
         int numberOfPlayer= players.length;
         ChanceCards chance = new ChanceCards();
         int positionChanceCard=0;
@@ -69,10 +54,7 @@ public class Game{
                             positionChanceCard=chance.chanceCard(positionChanceCard,player);
 
                         }
-                        else if(player.getPosition()==1 ||player.getPosition()==2  || player.getPosition()==4 || player.getPosition()==5||
-                        player.getPosition()==7 || player.getPosition()==8 || player.getPosition()==10 || player.getPosition()==11 ||
-                        player.getPosition()==13||player.getPosition()==14||player.getPosition()==16||player.getPosition()==17||
-                        player.getPosition()==19||player.getPosition()==20||player.getPosition()==22||player.getPosition()==23){ //buildings position
+                        else if(player.getPosition()%3!=0){ //buildings position
                                 Tiles tiles=playingArea1[player.getPosition()];
                             if (((Buildings) tiles).getOwner() ==null){
                                 if(player.getMoney()<((Buildings) tiles).getPrice()){
@@ -80,7 +62,7 @@ public class Game{
                                 }
                                 else {
                                     System.out.println("Do you want buy "+playingArea1[player.getPosition()].getName()+ " for "+((Buildings) tiles).getPrice() +" (yes=1/no=0)");
-                                    int answer=KeyboardInput.readInt();
+                                    int answer=exceptions.buyOrNot();
                                     if(answer==1){
                                         player.setMoney(player.getMoney()-((Buildings) tiles).getPrice());
                                         ((Buildings) tiles).setOwner(player.getName());
@@ -90,15 +72,16 @@ public class Game{
                                         System.out.println("you dont buy it ");
                                     }
                                 }
+
                             }
                             else{
                                // String ownerName=((Buildings) tiles).getOwner();
-                                player.setMoney(player.getMoney()-150);
-                                System.out.println("you are in "+((Buildings) tiles).getOwner()+ " buildings you play 150$");
+                                player.setMoney(player.getMoney()-((Buildings) tiles).getPrice());
+                                System.out.println("you are in "+((Buildings) tiles).getOwner()+ " buildings you pay him "+((Buildings) tiles).getPrice());
                                 String owner =((Buildings) tiles).getOwner();
                                 for(int helpPayPerStay=0;helpPayPerStay<players.length;helpPayPerStay++){
                                     if(players[helpPayPerStay].getName().equals(owner)){
-                                        players[helpPayPerStay].setMoney(players[helpPayPerStay].getMoney()+150);
+                                        players[helpPayPerStay].setMoney(players[helpPayPerStay].getMoney()+((Buildings) tiles).getPrice());
                                     }
                                 }
                             }

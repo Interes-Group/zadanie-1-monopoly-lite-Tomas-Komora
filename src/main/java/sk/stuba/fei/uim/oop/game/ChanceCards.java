@@ -1,11 +1,10 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.game;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import sk.stuba.fei.uim.oop.chanceCards.*;
 
 public class ChanceCards {
 
-    int chanceCard(int positionCards,Players player){
+    int chanceCard(int positionCards, Players player){
         ChanceCardEarnMoneay earnMoneay=new ChanceCardEarnMoneay();
         ChanceCardGoToStart goToStart=new ChanceCardGoToStart();
         ChanceCardLostMoney lostMoney=new ChanceCardLostMoney();

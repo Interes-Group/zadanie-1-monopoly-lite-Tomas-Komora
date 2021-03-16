@@ -1,4 +1,6 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.chanceCards;
+
+import sk.stuba.fei.uim.oop.game.Players;
 
 public class ChanceCardEarnMoneay extends Chance {
     public void chanceCardEarnMoney(Players player){

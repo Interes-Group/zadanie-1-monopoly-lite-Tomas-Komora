@@ -1,6 +1,8 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.chanceCards;
 
-public class ChanceCardGoToPrison extends Chance{
+import sk.stuba.fei.uim.oop.game.Players;
+
+public class ChanceCardGoToPrison extends Chance {
     public void chanceCarGotToPrison(Players player){
         setStatement("you go to the prison");
         player.setPosition(12);

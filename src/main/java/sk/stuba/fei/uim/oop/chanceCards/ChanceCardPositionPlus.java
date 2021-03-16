@@ -1,6 +1,8 @@
-package sk.stuba.fei.uim.oop;
+package sk.stuba.fei.uim.oop.chanceCards;
 
-public class ChanceCardPositionPlus extends Chance{
+import sk.stuba.fei.uim.oop.game.Players;
+
+public class ChanceCardPositionPlus extends Chance {
     public void chanceCardPositionPlus(Players player){
         setStatement("you chance card send you 2 position next");
         player.setPosition(player.getPosition()+2);
