@@ -13,10 +13,11 @@ public class Game{
         ChanceCards chance = new ChanceCards();
         int positionChanceCard=0;
         while(true){
-            for(int i=0;i< players.length;i++){
+            for(int i=0;i< numberOfPlayer;i++){
                 Players player=players[i];
                 if(numberOfPlayer==1){
                     System.out.println(player.getName()+" win! ");
+                    System.out.println("CONGRATULATUIONS!!!");
                     System.out.println("GAME OVER");
                     return;
                 }
@@ -41,6 +42,7 @@ public class Game{
                         if(player.getPosition()==12){  //police station position
                             player.setRoundsInPrison(3);
                             System.out.println("you go to the prison");
+                            exceptions.nextPush();
                         }
                         else if(player.getPosition()==6){ //prison  position
                             System.out.println("you visit prison");
@@ -52,6 +54,7 @@ public class Game{
                         else if(player.getPosition()==3 || player.getPosition()==9||player.getPosition()==15||player.getPosition()==21){//chance
                             System.out.println("you jump in chance tiles");
                             positionChanceCard=chance.chanceCard(positionChanceCard,player);
+                            exceptions.nextPush();
 
                         }
                         else if(player.getPosition()%3!=0){ //buildings position
@@ -75,7 +78,6 @@ public class Game{
 
                             }
                             else{
-                               // String ownerName=((Buildings) tiles).getOwner();
                                 player.setMoney(player.getMoney()-((Buildings) tiles).getPrice());
                                 System.out.println("you are in "+((Buildings) tiles).getOwner()+ " buildings you pay him "+((Buildings) tiles).getPrice());
                                 String owner =((Buildings) tiles).getOwner();
@@ -86,7 +88,10 @@ public class Game{
                                 }
                             }
                         }
-                }if(player.getMoney()<0){
+                }
+                int money = player.getMoney();
+                if(money<0){
+                    numberOfPlayer=numberOfPlayer-1;
                     System.out.println(player.getName()+ " lose !!! ");
                     for(int helpDeletingOwner= 1; helpDeletingOwner<playingArea1.length;helpDeletingOwner++){
                         if(helpDeletingOwner%3 !=0) {
@@ -100,8 +105,9 @@ public class Game{
                     }
                     for(int helpDeletingPlayer = i; helpDeletingPlayer < (players.length -1); helpDeletingPlayer++){
                         players[helpDeletingPlayer] = players[helpDeletingPlayer + 1];
-                        numberOfPlayer=numberOfPlayer-1;
+
                     }
+                    exceptions.nextPush();
                 }
                 System.out.println("Next player---------------------------------------------------");
 

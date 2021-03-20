@@ -39,6 +39,10 @@ public class InputIntegers{
             }
         return answer;
     }
+    void nextPush(){
+        System.out.println("press and the game will continue ");
+        String read=KeyboardInput.readString();
+    }
 
 
 }
