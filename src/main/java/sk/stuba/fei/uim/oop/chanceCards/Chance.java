@@ -1,17 +1,11 @@
 package sk.stuba.fei.uim.oop.chanceCards;
 
+import sk.stuba.fei.uim.oop.game.Players;
+
 public class Chance {
-        //4.Card ... player.setPosition(0)
-        protected String name;
-        protected String statement;
+        
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    protected String statement;
 
     public String getStatement() {
         return statement;
@@ -20,6 +14,7 @@ public class Chance {
     public void setStatement(String statement) {
         this.statement = statement;
     }
+    public void chanceCard(Players player){
 
-
+    }
 }

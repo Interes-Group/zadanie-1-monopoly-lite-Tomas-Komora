@@ -1,20 +1,28 @@
 package sk.stuba.fei.uim.oop.game;
 
 
+import sk.stuba.fei.uim.oop.chanceCards.Chance;
+
+import java.util.Queue;
+
 public class Game{
 
     public void monopolyGame(){
         InputIntegers exceptions=new InputIntegers();
+        ChanceCards chanceCards=new ChanceCards();
+
+        CornerBuildings cornerBuildings=new CornerBuildings();
         PlayingArea playingArea=new PlayingArea();
         Tiles[] playingArea1 = playingArea.setPlayingArea();
         Players playerses=new Players();
         Players[] players=playerses.setPlayer();
         int numberOfPlayer= players.length;
-        ChanceCards chance = new ChanceCards();
-        int positionChanceCard=0;
+        Queue<Chance> chanceQueue= chanceCards.chanceCard();
+
         while(true){
             for(int i=0;i< numberOfPlayer;i++){
                 Players player=players[i];
+
                 if(numberOfPlayer==1){
                     System.out.println(player.getName()+" win! ");
                     System.out.println("CONGRATULATUIONS!!!");
@@ -40,20 +48,17 @@ public class Game{
                     }
 
                         if(player.getPosition()==12){  //police station position
-                            player.setRoundsInPrison(3);
-                            System.out.println("you go to the prison");
-                            exceptions.nextPush();
+                            cornerBuildings.policeStation(player);
                         }
                         else if(player.getPosition()==6){ //prison  position
-                            System.out.println("you visit prison");
+                            cornerBuildings.prison();
                         }
                         else if(player.getPosition()==18){  //tax pay position
-                            player.setMoney(player.getMoney()-500);
-                            System.out.println("you pay tax 500$");
+                            cornerBuildings.tax(player);
                         }
                         else if(player.getPosition()==3 || player.getPosition()==9||player.getPosition()==15||player.getPosition()==21){//chance
                             System.out.println("you jump in chance tiles");
-                            positionChanceCard=chance.chanceCard(positionChanceCard,player);
+                            chanceCards.choosenChanceCard(chanceQueue,player);
                             exceptions.nextPush();
 
                         }
