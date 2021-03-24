@@ -11,9 +11,4 @@ public class ChanceCardGoToPrison extends Chance {
         System.out.println(getStatement());
     }
 
-    //public void chanceCarGotToPrison(Players player){
-    //    setStatement("you go to the prison");
-     //   player.setPosition(12);
-     //   System.out.println(getStatement());
-    //}
 }

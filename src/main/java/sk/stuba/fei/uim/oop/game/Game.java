@@ -47,22 +47,23 @@ public class Game{
                         System.out.println("you went through the start then you have more 100$ now you have : "+player.getMoney()+" money");
                     }
 
-                        if(player.getPosition()==12){  //police station position
+                        if(playingArea1[player.getPosition()].getName()=="Police Station"){  //police station position
                             cornerBuildings.policeStation(player);
                         }
-                        else if(player.getPosition()==6){ //prison  position
+                        else if(playingArea1[player.getPosition()].getName()=="Prison"){ //prison  position
                             cornerBuildings.prison();
                         }
-                        else if(player.getPosition()==18){  //tax pay position
+                        else if(playingArea1[player.getPosition()].getName()=="Tax paymant"){  //tax pay position
                             cornerBuildings.tax(player);
                         }
-                        else if(player.getPosition()==3 || player.getPosition()==9||player.getPosition()==15||player.getPosition()==21){//chance
+                        else if(playingArea1[player.getPosition()].getName()=="Chance"){//chance
                             System.out.println("you jump in chance tiles");
                             chanceCards.choosenChanceCard(chanceQueue,player);
                             exceptions.nextPush();
 
                         }
-                        else if(player.getPosition()%3!=0){ //buildings position
+
+                        else if(playingArea1[player.getPosition()].isBuilding()==true){ //buildings position
                                 Tiles tiles=playingArea1[player.getPosition()];
                             if (((Buildings) tiles).getOwner() ==null){
                                 if(player.getMoney()<((Buildings) tiles).getPrice()){
@@ -83,12 +84,12 @@ public class Game{
 
                             }
                             else{
-                                player.setMoney(player.getMoney()-((Buildings) tiles).getPrice());
-                                System.out.println("you are in "+((Buildings) tiles).getOwner()+ " buildings you pay him "+((Buildings) tiles).getPrice());
+                                player.setMoney(player.getMoney()-((Buildings) tiles).getPrice()/2);
+                                System.out.println("you are in "+((Buildings) tiles).getOwner()+ " buildings you pay him "+((Buildings) tiles).getPrice()/2);
                                 String owner =((Buildings) tiles).getOwner();
                                 for(int helpPayPerStay=0;helpPayPerStay<players.length;helpPayPerStay++){
                                     if(players[helpPayPerStay].getName().equals(owner)){
-                                        players[helpPayPerStay].setMoney(players[helpPayPerStay].getMoney()+((Buildings) tiles).getPrice());
+                                        players[helpPayPerStay].setMoney(players[helpPayPerStay].getMoney()+(((Buildings) tiles).getPrice()/2));
                                     }
                                 }
                             }

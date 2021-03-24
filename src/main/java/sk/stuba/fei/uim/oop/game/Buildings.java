@@ -6,6 +6,7 @@ public class Buildings extends Tiles {
     private int price;
 
 
+
     public String getOwner() {
         return owner;
     }
@@ -25,8 +26,8 @@ public class Buildings extends Tiles {
 
 
 
-    Buildings(String name, int position, int price, String owner){
-        super(name,position);
+    Buildings(String name, int position, int price, String owner,boolean isBuilding){
+        super(name,position,isBuilding);
         this.price=price;
         this.owner=owner;
     }

@@ -3,7 +3,6 @@ package sk.stuba.fei.uim.oop.chanceCards;
 import sk.stuba.fei.uim.oop.game.Players;
 
 public class Chance {
-        
 
     protected String statement;
 
