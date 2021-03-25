@@ -2,7 +2,7 @@ package sk.stuba.fei.uim.oop.chanceCards;
 
 import sk.stuba.fei.uim.oop.game.Players;
 
-public class Chance {
+public abstract class Chance {
 
     protected String statement;
 
@@ -13,7 +13,6 @@ public class Chance {
     public void setStatement(String statement) {
         this.statement = statement;
     }
-    public void chanceCard(Players player){
+    public abstract void chanceCard(Players player);
 
-    }
 }

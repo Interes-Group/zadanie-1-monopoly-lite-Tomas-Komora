@@ -20,9 +20,6 @@ public class Buildings extends Tiles {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
 
 
 

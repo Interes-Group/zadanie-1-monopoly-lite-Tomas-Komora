@@ -47,27 +47,27 @@ public class Game{
                         System.out.println("you went through the start then you have more 100$ now you have : "+player.getMoney()+" money");
                     }
 
-                        if(playingArea1[player.getPosition()].getName()=="Police Station"){  //police station position
+                        if((playingArea1[player.getPosition()].getName()).equals("Police Station")){  //police station position
                             cornerBuildings.policeStation(player);
                         }
-                        else if(playingArea1[player.getPosition()].getName()=="Prison"){ //prison  position
+                        else if(playingArea1[player.getPosition()].getName().equals("Prison")){ //prison  position
                             cornerBuildings.prison();
                         }
-                        else if(playingArea1[player.getPosition()].getName()=="Tax paymant"){  //tax pay position
+                        else if(playingArea1[player.getPosition()].getName().equals("Tax paymant")){  //tax pay position
                             cornerBuildings.tax(player);
                         }
-                        else if(playingArea1[player.getPosition()].getName()=="Chance"){//chance
+                        else if(playingArea1[player.getPosition()].getName().equals("Chance")){//chance
                             System.out.println("you jump in chance tiles");
                             chanceCards.choosenChanceCard(chanceQueue,player);
                             exceptions.nextPush();
 
                         }
 
-                        else if(playingArea1[player.getPosition()].isBuilding()==true){ //buildings position
+                        else if(playingArea1[player.getPosition()].isBuilding()){ //buildings position
                                 Tiles tiles=playingArea1[player.getPosition()];
                             if (((Buildings) tiles).getOwner() ==null){
                                 if(player.getMoney()<((Buildings) tiles).getPrice()){
-                                    System.out.println("!!!Warning!!! You can not buy new building you dont have enaught monay");
+                                    System.out.println("!!!Warning!!! You can not buy new building you dont have enough money");
                                 }
                                 else {
                                     System.out.println("Do you want buy "+playingArea1[player.getPosition()].getName()+ " for "+((Buildings) tiles).getPrice() +" (yes=1/no=0)");
@@ -87,9 +87,9 @@ public class Game{
                                 player.setMoney(player.getMoney()-((Buildings) tiles).getPrice()/2);
                                 System.out.println("you are in "+((Buildings) tiles).getOwner()+ " buildings you pay him "+((Buildings) tiles).getPrice()/2);
                                 String owner =((Buildings) tiles).getOwner();
-                                for(int helpPayPerStay=0;helpPayPerStay<players.length;helpPayPerStay++){
-                                    if(players[helpPayPerStay].getName().equals(owner)){
-                                        players[helpPayPerStay].setMoney(players[helpPayPerStay].getMoney()+(((Buildings) tiles).getPrice()/2));
+                                for (Players item : players) {
+                                    if (item.getName().equals(owner)) {
+                                        item.setMoney(item.getMoney() + (((Buildings) tiles).getPrice() / 2));
                                     }
                                 }
                             }
@@ -109,10 +109,8 @@ public class Game{
                             }
                         }
                     }
-                    for(int helpDeletingPlayer = i; helpDeletingPlayer < (players.length -1); helpDeletingPlayer++){
-                        players[helpDeletingPlayer] = players[helpDeletingPlayer + 1];
-
-                    }
+                    if (players.length - 1 - i >= 0)
+                        System.arraycopy(players, i + 1, players, i, players.length - 1 - i);
                     exceptions.nextPush();
                 }
                 System.out.println("Next player---------------------------------------------------");
